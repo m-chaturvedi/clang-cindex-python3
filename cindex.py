@@ -2299,9 +2299,14 @@ class TranslationUnit(ClangObject):
         if index is None:
             index = Index.create()
 
-        args_array = None
-        if len(args) > 0:
-            args_array = (c_char_p * len(args))(* args)
+        if isinstance(filename, str):
+            filename = filename.encode('utf8')
+
+        args_length = len(args)
+        if args_length > 0:
+            args = (arg.encode('utf8') if isinstance(arg, str) else arg
+                    for arg in args)
+            args_array = (c_char_p * args_length)(* args)
 
         unsaved_array = None
         if len(unsaved_files) > 0:
@@ -2315,7 +2320,7 @@ class TranslationUnit(ClangObject):
                 unsaved_array[i].length = len(contents)
 
         ptr = conf.lib.clang_parseTranslationUnit(index, filename, args_array,
-                                    len(args), unsaved_array,
+                                    args_length, unsaved_array,
                                     len(unsaved_files), options)
 
         if not ptr:
@@ -2599,7 +2604,7 @@ class File(ClangObject):
         """Return the last modification time of the file."""
         return conf.lib.clang_getFileTime(self)
 
-    def __str__(self):
+    def __bytes__(self):
         return self.name
 
     def __repr__(self):
