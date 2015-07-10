@@ -3400,9 +3400,9 @@ functionList = [
    [Cursor, c_uint],
    c_ulonglong),
 
-  ("clang_Cursor_isAnonymous",
-   [Cursor],
-   bool),
+#  ("clang_Cursor_isAnonymous",
+#   [Cursor],
+#   bool),
 
   ("clang_Cursor_isBitField",
    [Cursor],
@@ -3418,9 +3418,9 @@ functionList = [
    _CXString,
    _CXString.from_result),
 
-  ("clang_Cursor_getOffsetOfField",
-   [Cursor],
-   c_longlong),
+#  ("clang_Cursor_getOffsetOfField",
+#   [Cursor],
+#   c_longlong),
 
   ("clang_Type_getAlignOf",
    [Type],
@@ -3443,9 +3443,9 @@ functionList = [
    [Type],
    c_uint),
 
-  ("clang_Type_visitFields",
-   [Type, callbacks['fields_visit'], py_object],
-   c_uint),
+#  ("clang_Type_visitFields",
+#   [Type, callbacks['fields_visit'], py_object],
+#   c_uint),
 ]
 
 class LibclangError(Exception):
