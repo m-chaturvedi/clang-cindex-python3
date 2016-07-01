@@ -3631,7 +3631,7 @@ def register_functions(lib, ignore_errors):
 class Config:
     library_path = None
     library_file = None
-    compatibility_check = True
+    compatibility_check = False
     loaded = False
 
     @staticmethod
